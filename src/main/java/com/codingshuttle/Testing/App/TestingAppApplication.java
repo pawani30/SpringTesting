@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TestingAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestingAppApplication.class, args);
-	}
+        SpringApplication.run(TestingAppApplication.class, args);
 
+        System.out.println(java.util.TimeZone.getDefault().getID());
+    }
 }
