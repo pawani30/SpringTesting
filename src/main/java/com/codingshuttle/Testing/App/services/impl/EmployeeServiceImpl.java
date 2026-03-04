@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.info("Creating new employee with email : {}",employeeDto.getEmail());
         List<Employee> existingEmployees = employeeRepository.findByEmail(employeeDto.getEmail());
 
-        if(!existingEmployees.isEmpty()) {
+        if(!existingEmployees.isEmpty()) { //This line is a false hit
             log.error("Employee already exists with email : {}",employeeDto.getEmail());
             throw new RuntimeException("Employee already exists with email: "+employeeDto.getEmail());
         }
@@ -61,8 +61,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             log.error("Attempted to update email for employee with id : {}",id);
             throw new RuntimeException("The email of the employee cannot be updated");
         }
-        employeeDto.setId(null);
-        modelMapper.map(employeeDto, employee);
+
+        //employeeDto.setId(null);
+        //modelMapper.map(employeeDto,employee); If we do this than even if we set id to null while mapping modelMapper will not allow to set the id to null and the id will not be set to null and will not give any error while running the test case but when we map it to Employee.class than we will get error and id will remain null it will not be overridden by the modelMapper and now error will come while running the test case
+       // modelMapper.map(employeeDto,Employee.class); wrong save it to employee back otherwise the test case will fail
+        employee = modelMapper.map(employeeDto, Employee.class);
+        employee.setId(id); //here we can modify the id once again once all the fields from the employeeDto are added here employee and now the test case should run successfully
 
         Employee savedEmployee = employeeRepository.save(employee);
         log.info("Successfully updated employee with id : {}",id);
