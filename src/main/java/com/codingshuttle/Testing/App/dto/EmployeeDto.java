@@ -24,6 +24,7 @@ public class EmployeeDto {
         return Objects.equals(getId(), that.getId()) && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getName(), that.getName()) && Objects.equals(getSalary(), that.getSalary());
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getEmail(), getName(), getSalary());

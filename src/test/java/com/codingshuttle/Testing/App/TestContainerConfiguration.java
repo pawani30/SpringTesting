@@ -20,21 +20,22 @@ public class TestContainerConfiguration {
 //This will create(postgres:latest) an image of , create the docker image of this particular tag postgres:latest inside the docker container and than it will run that docker container just for the process of running my test cases
 // And after that it will also remove that test container from there,we have to import the TestContainer inside the repository code as well
 
-//    @Bean
-//    @ServiceConnection
-//    PostgreSQLContainer<?> postgresContainer() {
-//        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
-//    }
-
-
     @Bean
     @ServiceConnection
     PostgreSQLContainer<?> postgresContainer() {
-        return new PostgreSQLContainer<>("postgres:latest")
-                .withEnv("TZ", "Asia/Kolkata")
-                .withEnv("PGTZ", "Asia/Kolkata")
-                .withReuse(true);
+        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
     }
+
+
+//    @Bean
+//    @ServiceConnection
+////This is creating a PostgreSQlContainer,this is actually spinning up a docker image with this tag postgres:latest(This is the version) (which will have all teh dependencies related / needed to configure (run) postgres SQL) and this will actually run a docker/create a docker container for us with the image postgres:latest for the time it is running the integration test.Lets import this as well inside the integration testing so that we dont use the real db and use the testContainer to do the Integration testing
+//    PostgreSQLContainer<?> postgresContainer() {
+//        return new PostgreSQLContainer<>("postgres:latest")
+//                .withEnv("TZ", "Asia/Kolkata")
+//                .withEnv("PGTZ", "Asia/Kolkata")
+//                .withReuse(true);
+//    }
 
 }
 
