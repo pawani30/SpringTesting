@@ -69,6 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setId(id); //here we can modify the id once again once all the fields from the employeeDto are added here employee and now the test case should run successfully
 
         Employee savedEmployee = employeeRepository.save(employee);
+// When hibernate will try to insert the user with the same id (with the id which is already present inside the db),when hibernate tries to update the employee with the id that already exists in the db then it does not create a new row for that employee,it updates the existing user in the db that is present with the same id and hence the update query is run by the hibernate and not the insert query when hibernate tries to save the employee having the same id which is already present in the db(We already have a employee present,exists in the db with the same id)
         log.info("Successfully updated employee with id : {}",id);
         return modelMapper.map(employee,EmployeeDto.class);
 
