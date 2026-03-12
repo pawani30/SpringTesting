@@ -12,21 +12,22 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 //@SpringBootTest
-@Slf4j
+//@Slf4j
+
 class TestingAppApplicationTests {
 
 //    private static final Logger log = LoggerFactory.getLogger(TestingAppApplicationTests.class);
 
     @BeforeEach //This method will be run before every test case,if we do not use any annotation before this method this would not run because it only runs the method annotated with @Test , such annotation given by junit
     void setUp() {
-    log.info("Starting the method, setting up config.This method runs before all the test cases");
+    //log.info("Starting the method, setting up config.This method runs before all the test cases");
     }
 //used when ypu want to set up something before every test case.These are useful when you want to instantiate something when you want to create an instance that is being passed everywhere,you want to instantiate it and reset it before every test case than we use this annotation
 //@AfterEach : Used after every method,if you want to remove something maybe you are creating some resource before every test case and you want to remove that resource after every test case than you will write this
 
     @AfterEach //Run after every test case
     void tearDown() {
-        log.info("Tearing down the method");
+        //log.info("Tearing down the method");
     }
 
 //---------------OUTPUT FOR @AfterEach and @BeforeEach--------------
@@ -41,12 +42,12 @@ class TestingAppApplicationTests {
 //We have ti mark the method as static because we are making it a BeforeALl because now the method is the property of the class
     @BeforeAll
    static void setUpOnce() {
-        log.info("Setup Once....");
+        //log.info("Setup Once....");
     }
 
     @AfterAll
     static void tearDownOnce() {
-        log.info("Tearing down all....");
+        //log.info("Tearing down all....");
     }
     @Test
 //    @Disabled
@@ -83,11 +84,11 @@ class TestingAppApplicationTests {
 //        assertThat(result).isEqualTo(7)
 //                .isCloseTo(9, Offset.offset(1));
 
-        assertThat("apple")//Now this will give us all the methods supported by String Ex:equalTo.hasBoolean , we can convert it to Long,Byte,Short and check if this between these two strings or not if greater than another string or not,contains method and we will not get the integer related methods now
-                .isEqualTo("Apple")
-                .startsWith("App")
-                .endsWith("le")
-                .hasSize(5);
+//        assertThat("apple")//Now this will give us all the methods supported by String Ex:equalTo.hasBoolean , we can convert it to Long,Byte,Short and check if this between these two strings or not if greater than another string or not,contains method and we will not get the integer related methods now
+//                .isEqualTo("Apple")
+//                .startsWith("App")
+//                .endsWith("le")
+//                .hasSize(5);
 
 // It is recommended to add more and more assertThat method but also remember to follow single responsibility principle of solid principle A method that is supposed to do one thing should only do that thing it should not do any other thing
 // if we are writing the test case for handling addition function than it should only do/handle addition method only for one particular test case only
@@ -97,18 +98,18 @@ class TestingAppApplicationTests {
     @Test
 //    @DisplayName("displayTestNameTwo")
     void testNumberTwo() {
-//        log.info("test two is run");
-
-    int  a = 5;
-    int b = 3;
-    b = 0;
-
-    double result = divideTwoNumbers(a,b);
-    System.out.println(result);
-//Since we have made it a double return type as double so 5/0 is giving us infinity and no exception is being thrown from the method even after dividing it by 0
-//OUTPUT : Infinity when a = 5 and b = 0 , remove double.Now we will get the exception
-// After removing double : java.lang.ArithmeticException: / by zero.We want to check that if we are getting this exception correctly or not
-
+////        log.info("test two is run");
+//
+//    int  a = 5;
+//    int b = 3;
+//    b = 0;
+//
+//    double result = divideTwoNumbers(a,b);
+//    System.out.println(result);
+////Since we have made it a double return type as double so 5/0 is giving us infinity and no exception is being thrown from the method even after dividing it by 0
+////OUTPUT : Infinity when a = 5 and b = 0 , remove double.Now we will get the exception
+//// After removing double : java.lang.ArithmeticException: / by zero.We want to check that if we are getting this exception correctly or not
+//
     }
 
 @Test
@@ -140,10 +141,16 @@ double divideTwoNumbers(int a,int b){
         return  a/b;
         }
         catch(ArithmeticException e){
-            log.info("Arithmetic Exception occurred : "+e.getLocalizedMessage());
+           // log.info("Arithmetic Exception occurred : "+e.getLocalizedMessage());
 //            throw new ArithmeticException(e.getLocalizedMessage());
             throw new ArithmeticException("Tried to divide by Zero");
 
         }
 }
 }
+
+
+
+//Inside target we have jacoco.exec which contains the details of whole report inside the binary format.This binary format can be useful for some othe rthird party softwares that can read jacoco.exec and then generate diagrams and dashboards for you
+//inside target>site>open main (index.html) and open it in any of the browsers
+//Everytime you do package , the test cases are run and the report gets generated

@@ -22,15 +22,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final ModelMapper modelMapper;
 
+//    public EmployeeServiceImpl(EmployeeRepository employeeRepository,ModelMapper modelMapper) {
+//        this.employeeRepository = employeeRepository;
+//        this.modelMapper = modelMapper;
+//    }
+
     @Override
     public EmployeeDto getEmployeeById(Long id){
         log.info("Fetching employee with id : {}", id);
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> {
-                    log.error("Employee not found with id: {}",+id);
+                  log.error("Employee not found with id: {}",+id);
                     return new ResourceNotFoundException("Employee not found with id:"+id);
                 });
-        log.info("Successfully fetched employee with id : {}",+id);
+       log.info("Successfully fetched employee with id : {}",+id);
        return modelMapper.map(employee, EmployeeDto.class);
     }
 
@@ -40,12 +45,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> existingEmployees = employeeRepository.findByEmail(employeeDto.getEmail());
 
         if(!existingEmployees.isEmpty()) { //This line is a false hit
-            log.error("Employee already exists with email : {}",employeeDto.getEmail());
+           log.error("Employee already exists with email : {}",employeeDto.getEmail());
             throw new RuntimeException("Employee already exists with email: "+employeeDto.getEmail());
         }
         Employee newEmployee = modelMapper.map(employeeDto, Employee.class);
         Employee savedEmployee = employeeRepository.save(newEmployee);
-        log.info("Successfully created new employee with id : {}",savedEmployee.getId());
+      log.info("Successfully created new employee with id : {}",savedEmployee.getId());
         return modelMapper.map(savedEmployee, EmployeeDto.class);
     }
 
@@ -54,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.info("updating employee with id : {}",id);
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> {
-                    log.error("Employee not found with id : {}",id);
+                   log.error("Employee not found with id : {}",id);
                     return new ResourceNotFoundException("Employee not found with id: "+ id);
                 });
         if(!employee.getEmail().equals(employeeDto.getEmail())) {
@@ -70,7 +75,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee savedEmployee = employeeRepository.save(employee);
 // When hibernate will try to insert the user with the same id (with the id which is already present inside the db),when hibernate tries to update the employee with the id that already exists in the db then it does not create a new row for that employee,it updates the existing user in the db that is present with the same id and hence the update query is run by the hibernate and not the insert query when hibernate tries to save the employee having the same id which is already present in the db(We already have a employee present,exists in the db with the same id)
-        log.info("Successfully updated employee with id : {}",id);
+        //log.info("Successfully updated employee with id : {}",id);
         return modelMapper.map(employee,EmployeeDto.class);
 
 // Learn more on : https://chatgpt.com/share/697fb878-a05c-8012-8812-3f9f6c1731a6
@@ -84,15 +89,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 //                   throw new ResourceNotFoundException("Employee not found with id"+id);
 //                });
 // Else employee is found delete the employee
-        log.info("Deleting employee with id : {}",id);
+       // log.info("Deleting employee with id : {}",id);
         boolean exists = employeeRepository.existsById(id);
         if(!exists) {
-            log.error("Employee not found with id : {}",id);
+           log.error("Employee not found with id : {}",id);
             throw new ResourceNotFoundException("Employee not found with id: "+id);
         }
 
         employeeRepository.deleteById(id);
-        log.info("Successfully deleted employee with id: {}",id);
+      log.info("Successfully deleted employee with id: {}",id);
 //        return modelMapper.map(employee,EmployeeDto.class);
     }
 }

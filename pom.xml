@@ -64,6 +64,14 @@
 
 
 <!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--            <version>1.18.32</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+
+
+<!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter</artifactId>-->
 <!--        </dependency>-->
@@ -136,7 +144,55 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+
+<!-- It will actually insert a goal which is called report.The goal is report.During the prepare and package phase by maven it will generate the report as well.As soon as you run maven package command or as soon as maven package is done,report will be generated.Maven contains a lifecycle that contains multiple goals and they are install,package,clean multiple goals .Go to terminal and run the command : ./mvnw clean package This will first clean everything inside the target and it will generate the target once again and generate the report and you will see inside the target we have jacoco.exec-->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.11.0</version>-->
+
+<!--                <configuration>-->
+<!--                    <release>21</release>-->
+<!--                    <annotationProcessorPaths>-->
+<!--                        <path>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok</artifactId>-->
+<!--                            <version>1.18.32</version>-->
+<!--                        </path>-->
+<!--                    </annotationProcessorPaths>-->
+<!--                </configuration>-->
+
+<!--            </plugin>-->
+
+        </plugins>
 	</build>
 
 </project>
+
+
+<!--Change the File->Project Structure->Project and jdk version to 21 instead of 25 there also and then run the test cases after setting the system variable for jdk-21 in environment variables of the system , check that maven is using now java version 21 not 25 .Project Structure->Project shows the current running project settings-->
+<!--Make sure test cases are inside src only ,packages name can be be same in main and test-->
+<!--Running configurations is different ,the issue is coming just because of the version mismatch between maven and java (jdk - 25) as jdk 25 do not support lombock completely for now and is not compatible with the new version of lombock so degrade it to jdk-21 -->
+<!--Intellij configurations : When we run something on intellij,it takes configurations from the running configurations that we set by doing edit running configurations while running the application which is present at the top of the intellij,and using dropdown we run the tests and main application from there-->
+<!--But maven takes configurations , now from there but from the project->project structure(by system settings) and not intellij configurations.Use spring version as 3.5.8 only and not 3.3.2-->
+<!--https://chatgpt.com/share/69ad17b5-d35c-8012-8847-c35be8ec126f-->

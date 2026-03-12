@@ -1,10 +1,10 @@
 package com.codingshuttle.Testing.App.controllers;
 
-import com.codingshuttle.Testing.App.TestContainerConfiguration;
 import com.codingshuttle.Testing.App.dto.EmployeeDto;
 import com.codingshuttle.Testing.App.entities.Employee;
 import com.codingshuttle.Testing.App.repositories.EmployeeRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.util.TimeZone;
+
 
 class EmployeeControllerTestIT extends AbstractIntegrationTest{
 
@@ -23,6 +25,12 @@ class EmployeeControllerTestIT extends AbstractIntegrationTest{
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+// Before running every test case , we are setting the time zone
+    @BeforeAll
+    static void setTimezone() {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));
+    }
 
 
     @BeforeEach

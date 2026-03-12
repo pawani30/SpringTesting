@@ -5,7 +5,6 @@ import com.codingshuttle.Testing.App.dto.EmployeeDto;
 import com.codingshuttle.Testing.App.entities.Employee;
 import com.codingshuttle.Testing.App.exceptions.ResourceNotFoundException;
 import com.codingshuttle.Testing.App.repositories.EmployeeRepository;
-import com.codingshuttle.Testing.App.services.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -2,6 +2,7 @@ package com.codingshuttle.Testing.App.controllers;
 
 import com.codingshuttle.Testing.App.dto.EmployeeDto;
 import com.codingshuttle.Testing.App.services.EmployeeService;
+import com.codingshuttle.Testing.App.services.impl.EmployeeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,12 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employees")
-@RequiredArgsConstructor
-
+//@RequiredArgsConstructor
 //Since we are going to do integration testing on employeeService so ctrl+shift+t in windows(Command+shift+T) on one of the method to create new test.
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable Long id){

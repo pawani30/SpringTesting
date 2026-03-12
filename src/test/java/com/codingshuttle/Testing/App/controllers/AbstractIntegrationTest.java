@@ -25,10 +25,11 @@ public class AbstractIntegrationTest {
 //    private EmployeeDto testEmployeeDto;
 
   Employee testEmployee = Employee.builder()
-            .email("pawani@gmail.com")
-                .name("Pawani")
-                .salary(200L)
-                .build();
+          .email("pawani@gmail.com")
+          .name("Pawani")
+          .salary(200L)
+          //.id((long) 1L)
+         .build();
 
    EmployeeDto testEmployeeDto = EmployeeDto.builder()
             //.id(1L)
