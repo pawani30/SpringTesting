@@ -154,3 +154,8 @@ double divideTwoNumbers(int a,int b){
 //Inside target we have jacoco.exec which contains the details of whole report inside the binary format.This binary format can be useful for some othe rthird party softwares that can read jacoco.exec and then generate diagrams and dashboards for you
 //inside target>site>open main (index.html) and open it in any of the browsers
 //Everytime you do package , the test cases are run and the report gets generated
+
+
+
+
+// WebTestClient acts as a "wrapper" around the standard WebClient, adding a powerful fluent API for assertions. It allows you to:Send Requests: Prepare and execute HTTP requests (GET, POST, etc.) with a readable, chainable syntax.Verify Responses: Check the status code, headers, and body of a response in a single expression.Test Without a Server: It can bind directly to your controllers or application context to run tests using mock request and response objects, which is much faster than starting a real server.Test Real Servers: It can also perform full end-to-end integration tests by connecting to a live running server (usually on a RANDOM_PORT).
